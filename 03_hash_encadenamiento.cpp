@@ -196,7 +196,17 @@ private:
     // No hace falta ni un new ni un delete de Nodo: los nodos se REENLAZAN
     // en las nuevas listas (solo cambia su campo siguiente).
     void rehash(int nuevoM) {
-        // TODO: implementar.
+        std::vector<Nodo*>nuevas(nuevoM, nullptr);
+        for(Nodo* p:cubetas_)
+            while (p != nullptr){
+                Nodo* sig = p->siguiente
+                int j = hash(p->clave)%nuevoM;
+                p->siguiente = nuevas[j];
+                nuevas[j] = p;
+                p = sig;
+            }
+            cubetas_.swap(nuevas);
+    }
         // Pasos:
         //   1. Crear std::vector<Nodo*> nuevas(nuevoM, nullptr).
         //   2. Recorrer cada lista de cubetas_; para cada nodo p:
@@ -206,9 +216,6 @@ private:
         //        - meterlo al principio de nuevas[j],
         //        - sumar 1 a recolocados_ (para la medida del main).
         //   3. cubetas_.swap(nuevas).
-        (void)nuevoM;
-    }
-};
 
 std::vector<std::string> generarPalabras(int n, unsigned semilla) {
     static const char* silabas[] = {"ca", "sa", "ma", "pe", "ro", "la", "ti", "no", "me", "su",

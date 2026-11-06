@@ -80,13 +80,19 @@ unsigned long long hashSuma(const std::string& s) {
 //     resultado DESBORDA enseguida: con unsigned eso no es un error, es
 //     aritmetica modulo 2^64, y el hash sigue siendo determinista.
 unsigned long long hashPolinomico(const std::string& s) {
+    unsigned long long h = 0;
+    for(char c : s) {
+        h = h * 31 + (unsigned char)c;
+    }
+    return h;
+}
     // TODO: implementar con la regla de Horner y base B = 31.
     // Pista: igual que hashSuma(), pero multiplicando lo acumulado por B
     // ANTES de sumar cada caracter. Usa static_cast<unsigned char>(c) para
     // que los caracteres con acento (negativos en char) no resten.
-    (void)s;
-    return 0;
-}
+//    (void)s;
+//    return 0;
+//}
 
 // =========================================================================
 // Herramientas de medida

@@ -105,16 +105,19 @@ public:
     // casilla VACIA: marcarla BORRADA. Mantener los contadores del
     // invariante: n_ baja uno y lapidas_ sube uno.
     bool borrar(const std::string& clave) {
-        // TODO: implementar.
+        int pos = posicionDe(clave);
+        if(pos == -1) return false;
+        casillas_[pos].estado = Estado::BORRADA;
+        n_--;
+        lapidas_++;
+        return true;
+    }
         // Pistas:
         //   - int pos = posicionDe(clave); si es -1, no estaba.
         //   - Mira borrarMal() justo debajo: hace casi lo mismo, pero deja
         //     la casilla VACIA. Tu version la marca Estado::BORRADA.
         //   - Puedes vaciar el texto de la clave (clave.clear()): ya no
         //     hace falta, y buscar no mira la clave de una BORRADA.
-        (void)clave;
-        return false;
-    }
 
     // El error clasico, para verlo fallar en el main: deja la casilla VACIA.
     bool borrarMal(const std::string& clave) {
